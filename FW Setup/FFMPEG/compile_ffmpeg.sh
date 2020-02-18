@@ -21,7 +21,7 @@ make install
 cd ~
 
 #Compile ALSA
-wget ftp://ftp.alsa-project.org/pub/lib/alsa ... .1.tar.bz2
+wget ftp://ftp.alsa-project.org/pub/lib/alsa-lib-1.1.1.tar.bz2
 tar xjf alsa-lib-1.1.1.tar.bz2
 cd alsa-lib-1.1.1/
 ./configure --prefix=/home/pi/ffmpeg/dependencies/output
