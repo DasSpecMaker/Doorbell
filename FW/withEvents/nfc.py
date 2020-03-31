@@ -1,33 +1,8 @@
+#!/usr/bin/python
+
 import subprocess
 import time
 import socketio
-
-sio = socketio.Client();
-sio.connect('http://localhost:9000'); #can customize ip and port if you want
-#localhost shouldnt have to be modified since the subprocesses are ran on the same pi.
-#Streaming httpserver will runs on 8000 (streamTest.py)
-
-#predefined event handler, occurs when successful connection
-@sio.event
-def connect():
-    print("Connected")
-
-#predefined event handler, occurs when connecting to server failed
-@sio.event
-def connect_error():
-    print("The connection failed!")
-
-#predefined event handler, occurs when it disconnects from server
-@sio.event
-def disconnect():
-    print("I'm disconnected!")
-
-@sio.on('Activate_NFC') #the function directly underneath this statement is the event handler
-def Activate_NFC(sid):
-    print('NFC_is_Active')
-    sio.emit('NFC_is_Scanning'); #emit a socketio event to raspberry pi server
-    subprocess.call("nfc_run()", shell=True)
-
 
 
 
@@ -42,7 +17,7 @@ def read_nfc():
 
 def run():
     try:
-     #while True:
+     while True:
         myLines=read_nfc()
         buffer=[]
         for line in myLines.splitlines():
@@ -70,3 +45,5 @@ def run():
 
     except KeyboardInterrupt:
         pass
+
+run()
